@@ -9,6 +9,8 @@
 }
 
 .main {
+  width: 100%;
+  border: 5px solid red;
   padding: 5rem 0;
   flex: 1;
   display: flex;
