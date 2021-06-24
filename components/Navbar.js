@@ -3,6 +3,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
@@ -14,6 +15,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
+import { createUser } from '../firebase/userAuth';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -127,7 +131,7 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+          <Badge badgeContent={3} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -154,6 +158,8 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
+
+  const deger = useContext(UserContext);
 
   return (
     <div className={classes.grow}>
@@ -186,14 +192,17 @@ export default function PrimarySearchAppBar() {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Your Online Garage Sale... {deger}
+            </Typography>
+            <Button variant="outlined" color="primary">
+              Create user
+            </Button>
           </div>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
-          </Typography>
 
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={3} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>

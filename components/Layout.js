@@ -5,7 +5,6 @@ const Layout = ({ children }) => {
     <div>
       <main>
         <Navbar />
-        <h1>Hello</h1>
         {children}
       </main>
     </div>
