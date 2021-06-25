@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 
 function Copyright() {
   return (
@@ -44,10 +47,29 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default function SignIn() {
   const classes = useStyles();
+  const [state, setState] = React.useState({
+    age: '',
+    name: 'hai',
+  });
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    setState({
+      ...state,
+      [name]: event.target.value,
+    });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -57,7 +79,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Add Product
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -82,6 +104,24 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel htmlFor="outlined-age-native-simple">Agexx</InputLabel>
+            <Select
+              native
+              value={state.age}
+              onChange={handleChange}
+              label="Age"
+              inputProps={{
+                name: 'age',
+                id: 'outlined-age-native-simple',
+              }}
+            >
+              <option aria-label="None" value="" />
+              <option value={10}>Ten</option>
+              <option value={20}>Twenty</option>
+              <option value={30}>Thirty</option>
+            </Select>
+          </FormControl>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
@@ -93,20 +133,8 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Add
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
       <Box mt={8}>

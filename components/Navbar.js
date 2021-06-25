@@ -126,6 +126,14 @@ export default function PrimarySearchAppBar() {
           <MenuItem onClick={handleMenuClose}>My account</MenuItem>
           <MenuItem
             onClick={() => {
+              handleMenuClose();
+              router.push('/add_product');
+            }}
+          >
+            Add Product
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
               logout();
               handleMenuClose();
             }}
@@ -196,9 +204,6 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
-
-  //const [user, setUser] = useContext(UserContext);
-
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -234,9 +239,6 @@ export default function PrimarySearchAppBar() {
               <Link href="/">Your Online Garage Sale... </Link>
               {user?.name}
             </Typography>
-            <Button variant="outlined" color="primary">
-              Create user
-            </Button>
           </div>
 
           <div className={classes.sectionDesktop}>
