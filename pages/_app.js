@@ -5,7 +5,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import PropTypes from 'prop-types';
 import theme from '../styles/theme';
 import Head from 'next/head';
-import { UserContext } from '../contexts/UserContext';
 import { useState } from 'react';
 import { useUser } from '../firebase/useUser';
 
@@ -23,21 +22,19 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <React.Fragment>
-      <UserContext.Provider value={[user, setUser]}>
-        <Layout>
-          <Head>
-            <title>My page</title>
-            <meta
-              name="viewport"
-              content="minimum-scale=1, initial-scale=1, width=device-width"
-            />
-          </Head>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </Layout>
-      </UserContext.Provider>
+      <Layout>
+        <Head>
+          <title>My page</title>
+          <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width"
+          />
+        </Head>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </Layout>
     </React.Fragment>
   );
 }

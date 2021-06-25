@@ -85,7 +85,7 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const { user, logout } = useUser();
+  const [user, logout] = useContext(UserContext);
   console.log('Navbardan gelen', user);
   const router = useRouter();
 

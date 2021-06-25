@@ -2,11 +2,13 @@ import Head from 'next/head';
 import WriteToCloudFirestore from '../components/cloudFirestore/Write';
 import ReadFromCloudFirestore from '../components/cloudFirestore/Read';
 import initFirebase from '../firebase/useUser';
-import { useUser } from '../firebase/useUser';
+//import { useUser } from '../firebase/useUser';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 
 export default function Home() {
-  const { user, logout } = useUser();
+  const [user, logout] = useContext(UserContext);
   console.log('Indexten gelen:', user);
 
   if (user) {
