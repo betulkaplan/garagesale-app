@@ -193,7 +193,7 @@ export default function PrimarySearchAppBar() {
               />
             </div>
             <Typography className={classes.title} variant="h6" noWrap>
-              Your Online Garage Sale... {deger}
+              Your Online Garage Sale...
             </Typography>
             <Button variant="outlined" color="primary">
               Create user
