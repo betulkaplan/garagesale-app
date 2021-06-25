@@ -1,5 +1,13 @@
+import { useUser } from '../firebase/useUser';
+
 const About = () => {
-  return <div>About page</div>;
+  const { user, logout } = useUser();
+  return (
+    <div>
+      About page
+      {user ? <p>User here</p> : <p>No user</p>}
+    </div>
+  );
 };
 
 export default About;

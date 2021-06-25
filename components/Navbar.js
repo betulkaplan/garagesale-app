@@ -18,6 +18,9 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { createUser } from '../firebase/userAuth';
+import Link from 'next/link';
+import { useUser } from '../firebase/useUser';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -82,6 +85,10 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  const { user, logout } = useUser();
+  console.log('Navbardan gelen', user);
+  const router = useRouter();
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -113,8 +120,39 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {user !== undefined ? (
+        <div>
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+          <MenuItem
+            onClick={() => {
+              logout();
+              handleMenuClose();
+            }}
+          >
+            Logout
+          </MenuItem>
+        </div>
+      ) : (
+        <div>
+          <MenuItem
+            onClick={() => {
+              handleMenuClose();
+              router.push('/auth');
+            }}
+          >
+            Login
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleMenuClose();
+              router.push('/auth');
+            }}
+          >
+            Register
+          </MenuItem>
+        </div>
+      )}
     </Menu>
   );
 
@@ -159,7 +197,7 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-  const deger = useContext(UserContext);
+  //const [user, setUser] = useContext(UserContext);
 
   return (
     <div className={classes.grow}>
@@ -193,7 +231,8 @@ export default function PrimarySearchAppBar() {
               />
             </div>
             <Typography className={classes.title} variant="h6" noWrap>
-              Your Online Garage Sale...
+              <Link href="/">Your Online Garage Sale... </Link>
+              {user?.name}
             </Typography>
             <Button variant="outlined" color="primary">
               Create user
@@ -201,16 +240,23 @@ export default function PrimarySearchAppBar() {
           </div>
 
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={3} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            {user ? (
+              <>
+                <IconButton aria-label="show 4 new mails" color="inherit">
+                  <Badge badgeContent={3} color="secondary">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={17} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+              </>
+            ) : null}
             <IconButton
               edge="end"
               aria-label="account of current user"

@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 export default function Home() {
   const { user, logout } = useUser();
+  console.log('Indexten gelen:', user);
 
   if (user) {
     return (
@@ -20,15 +21,11 @@ export default function Home() {
         )}
         <WriteToCloudFirestore />
         <ReadFromCloudFirestore />
-        <button onClick={() => logout()}>Log Out</button>
       </>
     );
   } else
     return (
       <div>
-        <p>
-          <Link href="/auth">Log In!</Link>
-        </p>
         <Head>
           <title>Garage Sale</title>
         </Head>

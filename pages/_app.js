@@ -6,9 +6,13 @@ import PropTypes from 'prop-types';
 import theme from '../styles/theme';
 import Head from 'next/head';
 import { UserContext } from '../contexts/UserContext';
+import { useState } from 'react';
+import { useUser } from '../firebase/useUser';
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
+  const { user2, logout } = useUser();
+  const [user, setUser] = useState(user2);
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -19,7 +23,7 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <React.Fragment>
-      <UserContext.Provider value="Değerxxxx">
+      <UserContext.Provider value={[user, setUser]}>
         <Layout>
           <Head>
             <title>My page</title>

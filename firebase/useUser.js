@@ -23,7 +23,7 @@ const useUser = () => {
       .then(() => {
         // Sign-out successful.
         setUser(null);
-        router.push('/');
+        //router.push('/');
       })
       .catch((e) => {
         console.error(e);
@@ -47,7 +47,7 @@ const useUser = () => {
 
     const userFromCookie = getUserFromCookie();
     if (!userFromCookie) {
-      router.push('/');
+      //router.push('/');
       return;
     }
     setUser(userFromCookie);
