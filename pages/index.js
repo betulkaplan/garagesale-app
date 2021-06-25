@@ -3,6 +3,7 @@ import WriteToCloudFirestore from '../components/cloudFirestore/Write';
 import ReadFromCloudFirestore from '../components/cloudFirestore/Read';
 import initFirebase from '../firebase/useUser';
 import { useUser } from '../firebase/useUser';
+import Link from 'next/link';
 
 export default function Home() {
   const { user, logout } = useUser();
@@ -26,7 +27,7 @@ export default function Home() {
     return (
       <div>
         <p>
-          <a href="/auth">Log In!</a>
+          <Link href="/auth">Log In!</Link>
         </p>
         <Head>
           <title>Garage Sale</title>

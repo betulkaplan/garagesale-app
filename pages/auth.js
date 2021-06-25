@@ -1,11 +1,12 @@
 import FirebaseAuth from '../components/auth/FirebaseAuth';
+import Link from 'next/link';
 
 const Auth = () => {
   return (
     <div>
       <FirebaseAuth />
       <p>
-        <a href="/">Go Home </a>
+        <Link href="/">Go Home </Link>
       </p>
     </div>
   );
