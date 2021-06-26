@@ -1,3 +1,4 @@
+import { storage } from 'firebase-admin';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import { useRef, useState } from 'react';
@@ -21,6 +22,13 @@ const UploadFile = () => {
       },
       function complete() {
         alert('Upload to firebase storage successful');
+        // () => {
+        //   firebase.storage
+        //     .ref('products_img')
+        //     .child(file.name)
+        //     .getDownloadURL()
+        //     .then((url) => console.log(url));
+        // };
       }
     );
   }
