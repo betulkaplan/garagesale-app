@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/storage';
 import { useRef, useState } from 'react';
 
-const UploadFile = () => {
+const UploadFile = ({ setImage }) => {
   const inputEl = useRef(null);
   const [value, setValue] = useState(0);
 
@@ -27,7 +27,10 @@ const UploadFile = () => {
           .ref('products_img')
           .child(file.name)
           .getDownloadURL()
-          .then((url) => console.log(url))
+          .then((url) => {
+            console.log(url);
+            setImage(url);
+          })
           .catch((error) => console.log(error));
       }
     );

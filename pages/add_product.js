@@ -17,6 +17,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import UploadFile from '../components/storage/UploadFile';
+import { useState } from 'react';
 
 function Copyright() {
   return (
@@ -55,6 +56,10 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  large: {
+    width: theme.spacing(20),
+    height: theme.spacing(20),
+  },
 }));
 
 export default function SignIn() {
@@ -63,6 +68,7 @@ export default function SignIn() {
     age: '',
     name: 'hai',
   });
+  const [image, setImage] = useState(null);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -76,9 +82,15 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Avatar
+          alt="Remy Sharp"
+          src={
+            image
+              ? image
+              : 'https://images.unsplash.com/photo-1621570169694-4867389dcc66?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+          }
+          className={classes.large}
+        />
         <Typography component="h1" variant="h5">
           Add Product
         </Typography>
@@ -131,7 +143,7 @@ export default function SignIn() {
             </Select>
           </FormControl>
           <Input margin="none" variant="outlined" fullWidth type="file" />
-          <UploadFile />
+          <UploadFile setImage={setImage} />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
