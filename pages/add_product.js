@@ -15,6 +15,8 @@ import Container from '@material-ui/core/Container';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import UploadFile from '../components/storage/UploadFile';
 
 function Copyright() {
   return (
@@ -48,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   formControl: {
-    margin: theme.spacing(1),
     minWidth: 120,
   },
   selectEmpty: {
@@ -88,7 +89,7 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Product Title"
             name="email"
             autoComplete="email"
             autoFocus
@@ -99,13 +100,20 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Price"
             type="password"
             id="password"
             autoComplete="current-password"
           />
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel htmlFor="outlined-age-native-simple">Agexx</InputLabel>
+          <FormControl
+            margin="none"
+            fullWidth
+            variant="outlined"
+            className={classes.formControl}
+          >
+            <InputLabel htmlFor="outlined-age-native-simple">
+              Condition
+            </InputLabel>
             <Select
               native
               value={state.age}
@@ -122,6 +130,8 @@ export default function SignIn() {
               <option value={30}>Thirty</option>
             </Select>
           </FormControl>
+          <Input margin="none" variant="outlined" fullWidth type="file" />
+          <UploadFile />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
