@@ -175,33 +175,80 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={3} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      {user !== undefined ? (
+        <div>
+          <MenuItem>
+            <IconButton aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={3} color="secondary">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+            <p>Messages</p>
+          </MenuItem>
+          <MenuItem>
+            <IconButton aria-label="show 11 new notifications" color="inherit">
+              <Badge badgeContent={11} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <p>Notifications</p>
+          </MenuItem>
+          <MenuItem>
+            <IconButton aria-label="show 11 new notifications" color="inherit">
+              <Badge badgeContent={11} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <p>Add Product</p>
+          </MenuItem>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <p>Profile</p>
+          </MenuItem>{' '}
+        </div>
+      ) : (
+        <div>
+          <MenuItem
+            onClick={() => {
+              handleMenuClose();
+              router.push('/auth');
+            }}
+          >
+            <IconButton aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={3} color="secondary">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+            <p>Login</p>
+          </MenuItem>
+          <MenuItem>
+            <IconButton aria-label="show 11 new notifications" color="inherit">
+              <Badge badgeContent={11} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <p>Register</p>
+          </MenuItem>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <p>Profile</p>
+          </MenuItem>{' '}
+        </div>
+      )}
     </Menu>
   );
   return (
