@@ -185,6 +185,17 @@ export default function PrimarySearchAppBar() {
             </IconButton>
             <p>Messages</p>
           </MenuItem>
+          <MenuItem
+            onClick={() => {
+              logout();
+              handleMenuClose();
+            }}
+          >
+            <IconButton aria-label="show 4 new mails" color="inherit">
+              <MailIcon />
+            </IconButton>
+            <p>Logout</p>
+          </MenuItem>
           <MenuItem>
             <IconButton aria-label="show 11 new notifications" color="inherit">
               <Badge badgeContent={11} color="secondary">
