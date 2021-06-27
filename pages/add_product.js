@@ -17,7 +17,9 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import UploadFile from '../components/storage/UploadFile';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
+import WriteToCloudFirestore from '../components/cloudFirestore/Write';
 
 function Copyright() {
   return (
@@ -69,6 +71,10 @@ export default function SignIn() {
     name: 'hai',
   });
   const [image, setImage] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [user, logout] = useContext(UserContext);
+  //console.log('PRODCUTTAN GELELN', user.email);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -94,6 +100,15 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Add Product
         </Typography>
+        <WriteToCloudFirestore
+          collection="products"
+          document={user?.email}
+          data={{
+            title: title,
+            price: price,
+            picUrl: image,
+          }}
+        />
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -105,6 +120,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -113,9 +129,10 @@ export default function SignIn() {
             fullWidth
             name="password"
             label="Price"
-            type="password"
+            type="text"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => setPrice(e.target.value)}
           />
           <FormControl
             margin="none"
@@ -142,7 +159,6 @@ export default function SignIn() {
               <option value={30}>Thirty</option>
             </Select>
           </FormControl>
-          <Input margin="none" variant="outlined" fullWidth type="file" />
           <UploadFile setImage={setImage} />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

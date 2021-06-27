@@ -2,15 +2,15 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { useState } from 'react';
 
-const WriteToCloudFirestore = () => {
+const WriteToCloudFirestore = ({ collection, document, data }) => {
   const [datam, setDatam] = useState('');
   const sendData = () => {
     try {
       firebase
         .firestore()
-        .collection('myCollection')
-        .doc('myDocument')
-        .set({ id: datam })
+        .collection(collection)
+        .doc(document)
+        .set({ id: data })
         .then(alert('Data was succesfully was sent.'));
     } catch (error) {
       console.log(error);

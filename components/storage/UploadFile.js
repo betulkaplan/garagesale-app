@@ -1,13 +1,18 @@
 import firebase from 'firebase/app';
 import 'firebase/storage';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import Input from '@material-ui/core/Input';
 
 const UploadFile = ({ setImage }) => {
-  const inputEl = useRef(null);
+  const [inputEl, setInputEl] = useState(null);
   const [value, setValue] = useState(0);
 
+  useEffect(() => {
+    if (inputEl !== null) upLoadFile();
+  }, [inputEl]);
+
   function upLoadFile() {
-    const file = inputEl.current.files[0];
+    const file = inputEl;
     const storageRef = firebase.storage().ref('products_img/' + file.name);
     let task = storageRef.put(file);
 
@@ -39,7 +44,16 @@ const UploadFile = ({ setImage }) => {
   return (
     <>
       <progress value={value} max="100"></progress>
-      <input type="file" ref={inputEl} />
+      <Input
+        inputRef={inputEl}
+        margin="none"
+        variant="outlined"
+        fullWidth
+        type="file"
+        onChange={(e) => {
+          setInputEl(e.target.files[0]);
+        }}
+      />
       <button type="button" onClick={upLoadFile}>
         Upload
       </button>
