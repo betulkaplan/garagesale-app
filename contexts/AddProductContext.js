@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { useRouter } from 'next/router';
 
 import { Children } from 'react';
 import { createContext } from 'react';
@@ -7,6 +8,7 @@ import { createContext } from 'react';
 export const AddProdContext = createContext(null);
 
 export const AddProdProvider = ({ children }) => {
+  const router = useRouter();
   var lastProduct;
   function addProduct(user, data) {
     console.log('Başladık');
@@ -47,7 +49,10 @@ export const AddProdProvider = ({ children }) => {
             .collection('users')
             .doc(user.email)
             .set({ last_product: lastProduct + 1 })
-            .then(console.log('2- kullanıcı güncellendi'));
+            .then(() => {
+              console.log('2- kullanıcı güncellendi');
+              router.push('/profile');
+            });
         });
       console.log('3-');
     } catch (error) {

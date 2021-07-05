@@ -77,7 +77,6 @@ export default function SignIn() {
   const [price, setPrice] = useState(null);
   const [user, logout] = useContext(UserContext);
   const addProd = useContext(AddProdContext);
-  //console.log('PRODCUTTAN GELELN', user.email);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -103,13 +102,6 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Add Product
         </Typography>
-        <AddProduct
-          user={user}
-          data={{
-            price: price,
-            title: title,
-          }}
-        />
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -175,6 +167,8 @@ export default function SignIn() {
               addProd(user, {
                 price: price,
                 title: title,
+                image: image,
+                user: user.email,
               });
             }}
           >

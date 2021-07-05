@@ -122,7 +122,7 @@ export default function PrimarySearchAppBar() {
     >
       {user !== undefined ? (
         <div>
-          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          <MenuItem onClick={() => router.push('/profile')}>Profile</MenuItem>
           <MenuItem onClick={handleMenuClose}>My account</MenuItem>
           <MenuItem
             onClick={() => {

@@ -54,9 +54,6 @@ const UploadFile = ({ setImage }) => {
           setInputEl(e.target.files[0]);
         }}
       />
-      <button type="button" onClick={upLoadFile}>
-        Upload
-      </button>
     </>
   );
 };
