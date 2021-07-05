@@ -101,24 +101,6 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Add Product
         </Typography>
-        {/* <WriteToCloudFirestore
-          collection="products"
-          document={user?.id + '-1'}
-          data={{
-            title: title,
-            price: price,
-            picUrl: image,
-          }}
-        />
-        <WriteToCloudFirestore
-          collection="users"
-          document={user?.id}
-          data={{
-            last_product: user?.id + '-1',
-            price: price,
-            picUrl: image,
-          }}
-        /> */}
         <AddProduct
           user={user}
           data={{

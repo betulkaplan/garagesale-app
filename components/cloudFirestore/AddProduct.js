@@ -1,32 +1,30 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
+import Button from '@material-ui/core/Button';
 
-const WriteToCloudFirestore = ({ user, data }) => {
-  const [datam, setDatam] = useState('');
+const AddProduct = ({ user, data }) => {
   var lastProduct;
 
-  async function readData() {
+  function addProduct() {
     console.log('-2');
     try {
-      firebase
+      firebase //get the last number of product of the user
         .firestore()
         .collection('users')
         .doc(user.email)
         .get()
         .then((sn) => {
-          console.log(sn.data());
-          lastProduct = sn.data().last_product;
-          sendData();
+          if (sn.exists) {
+            // console.log('---->', sn.data());
+            lastProduct = sn.data().last_product;
+            sendData();
+          } else {
+            // console.log('daha data girilmemiş');
+            lastProduct = 0;
+            sendData();
+          }
         });
-      // firebase
-      //   .firestore()
-      //   .collection('users')
-      //   .doc(user.email)
-      //   .onSnapshot((doc) => {
-      //     lastProduct = doc.data().last_product;
-      //     console.log('-1', lastProduct);
-      //   });
       console.log('Data was fethced succesfully');
     } catch (error) {
       console.log(error);
@@ -55,25 +53,48 @@ const WriteToCloudFirestore = ({ user, data }) => {
       console.log('error');
     }
   }
-  console.log('4');
-  //sendData();
   return (
     <>
-      <input value={datam} onChange={(e) => setDatam(e.target.value)} />
       <button
         type="button"
         onClick={() => {
-          readData();
-          //setTimeout(() => sendData(), 1500);
+          addProduct();
         }}
       >
         Send data
       </button>
-      {/* <button type="button" onClick={sendData}>
-        Send data
-      </button> */}
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        color="primary"
+        // className={classes.submit}
+      >
+        Add
+      </Button>
     </>
   );
 };
 
-export default WriteToCloudFirestore;
+export default AddProduct;
+
+export const UserContext = createContext();
+
+// This context provider is passed to any component requiring the context
+export const UserProvider = ({ children }) => {
+  const [name, setName] = useState('William');
+  const [location, setLocation] = useState('Mars');
+
+  return (
+    <UserContext.Provider
+      value={{
+        name,
+        location,
+        setName,
+        setLocation,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};
