@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import ProductCard from '../components/ProductCard';
 
 const Dashboard = () => {
   const [products, setProducts] = useState(null);
@@ -25,9 +26,17 @@ const Dashboard = () => {
   return (
     <div>
       {products ? (
-        products.map((product, index) =>
-          console.log(index, '->', product.data())
-        )
+        products.map((product, index) => {
+          console.log(index, '->', product.data());
+          console.log(index, 'resim->', product.data().data.image);
+          return (
+            <ProductCard
+              key={index}
+              title={product.data().data.title}
+              image={product.data().data.image}
+            />
+          );
+        })
       ) : (
         <h1>BOŞ</h1>
       )}

@@ -51,7 +51,7 @@ export const AddProdProvider = ({ children }) => {
             .set({ last_product: lastProduct + 1 })
             .then(() => {
               console.log('2- kullanıcı güncellendi');
-              router.push('/profile');
+              router.push('/dashboard');
             });
         });
       console.log('3-');
