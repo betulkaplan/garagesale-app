@@ -21,6 +21,7 @@ import { useState, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import WriteToCloudFirestore from '../components/cloudFirestore/Write';
 import AddProduct from '../components/cloudFirestore/AddProduct';
+import { AddProdContext } from '../contexts/AddProductContext';
 
 function Copyright() {
   return (
@@ -75,6 +76,7 @@ export default function SignIn() {
   const [title, setTitle] = useState(null);
   const [price, setPrice] = useState(null);
   const [user, logout] = useContext(UserContext);
+  const addProd = useContext(AddProdContext);
   //console.log('PRODCUTTAN GELELN', user.email);
 
   const handleChange = (event) => {
@@ -164,11 +166,17 @@ export default function SignIn() {
             label="Remember me"
           />
           <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => {
+              addProd(user, {
+                price: price,
+                title: title,
+              });
+            }}
           >
             Add
           </Button>
