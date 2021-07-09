@@ -49,7 +49,6 @@ const ProductCard = ({ title, image }) => {
   };
   return (
     <div>
-      <h1>{title}</h1>;
       <Card className={classes.root}>
         <CardHeader
           avatar={
